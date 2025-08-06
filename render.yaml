@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: fastapi-mcp
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: DATABASE_URI
+        value: postgresql://postgres:1234@host.docker.internal:5432/Healthcaredatabase?sslmode=disable
