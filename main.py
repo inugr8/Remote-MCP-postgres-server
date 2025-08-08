@@ -1,5 +1,7 @@
-from fastmcp import FastMCP
+# main.py
 import os
+from fastmcp import FastMCP
+
 from tools.list_schemas import list_schemas
 from tools.list_objects import list_objects
 from tools.get_object_details import get_object_details
@@ -12,7 +14,7 @@ from tools.execute_sql import execute_sql
 
 app = FastMCP(
     title="PostgreSQL Deep Inspection Tools",
-    description="MCP tool server using fastMCP for schema introspection, index analysis, query execution.",
+    description="MCP tool server using FastMCP for schema introspection, index analysis, and safe query execution.",
     version="1.0.0",
     tools=[
         list_schemas,
@@ -23,11 +25,11 @@ app = FastMCP(
         analyze_query_indexes,
         analyze_db_health,
         get_top_queries,
-        execute_sql
-    ]
+        execute_sql,
+    ],
 )
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", "8000"))
-    # Important: bind to 0.0.0.0 so Render can see it
+    # Render automatically injects the port into $PORT
+    port = int(os.environ.get("PORT", 8000))
     app.run(host="0.0.0.0", port=port)
