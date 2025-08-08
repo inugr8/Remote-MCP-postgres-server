@@ -1,7 +1,4 @@
-from fastmcp.tools import tool
 from db import get_connection
-
-@tool()
 def execute_sql(sql: str) -> list[dict]:
     """
     Safely executes SELECT queries only.
