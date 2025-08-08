@@ -1,7 +1,5 @@
-from fastmcp.tools import tool
 from db import get_connection
 
-@tool()
 def explain_query(sql: str) -> list[str]:
     """
     Runs EXPLAIN on the provided SQL query (read-only).
