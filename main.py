@@ -1,4 +1,3 @@
-# File: main.py
 from fastmcp import FastMCP
 
 from tools.list_schemas import list_schemas
