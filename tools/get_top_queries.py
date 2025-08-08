@@ -1,7 +1,4 @@
-from fastmcp.tools import tool
 from db import get_connection
-
-@tool()
 def get_top_queries(limit: int = 5) -> list[dict]:
     """
     Gets top slow queries from pg_stat_statements (if enabled).
