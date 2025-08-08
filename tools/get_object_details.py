@@ -1,7 +1,5 @@
-from fastmcp.tools import tool
 from db import get_connection
 
-@tool()
 def get_object_details(table_name: str, schema: str = "public") -> dict:
     """
     Returns column details and constraints for a table.
