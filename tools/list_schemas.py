@@ -1,7 +1,5 @@
-from fastmcp.tools import tool
 from db import get_connection
 
-@tool()
 def list_schemas() -> list[str]:
     """
     Lists all available schemas in the PostgreSQL database.
