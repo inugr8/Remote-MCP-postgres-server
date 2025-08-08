@@ -1,7 +1,4 @@
-from fastmcp.tools import tool
 from db import get_connection
-
-@tool()
 def analyze_db_health() -> dict:
     """
     Returns size of each table in the public schema.
