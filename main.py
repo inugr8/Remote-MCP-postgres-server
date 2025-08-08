@@ -1,18 +1,32 @@
-from fastapi import FastAPI
-from tools import get_user, get_ticket, get_comments
+# File: main.py
+from fastmcp import FastMCP
 
-app = FastAPI(
-    title="PostgreSQL Support Tool",
-    description="Use this tool to query user info, ticket status, and support comments from a PostgreSQL database.",
+from tools.list_schemas import list_schemas
+from tools.list_objects import list_objects
+from tools.get_object_details import get_object_details
+from tools.explain_query import explain_query
+from tools.analyze_workload_indexes import analyze_workload_indexes
+from tools.analyze_query_indexes import analyze_query_indexes
+from tools.analyze_db_health import analyze_db_health
+from tools.get_top_queries import get_top_queries
+from tools.execute_sql import execute_sql
+
+app = FastMCP(
+    title="PostgreSQL Deep Inspection Tools",
+    description="MCP tool server using fastMCP for schema introspection, index analysis, query execution.",
     version="1.0.0",
-    servers=[
-        {
-            "url": "https://remote-mcp-postgres-server.onrender.com",  # ⬅️ Your deployed URL
-            "description": "Public Render server"
-        }
+    tools=[
+        list_schemas,
+        list_objects,
+        get_object_details,
+        explain_query,
+        analyze_workload_indexes,
+        analyze_query_indexes,
+        analyze_db_health,
+        get_top_queries,
+        execute_sql
     ]
 )
 
-app.include_router(get_user.router)
-app.include_router(get_ticket.router)
-app.include_router(get_comments.router)
+if __name__ == "__main__":
+    app.run()
