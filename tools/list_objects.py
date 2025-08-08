@@ -1,4 +1,4 @@
-from mcp.server import tool
+from fastmcp import tool
 from db import get_connection
 
 @tool()
