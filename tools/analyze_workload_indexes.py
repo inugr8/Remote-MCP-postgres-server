@@ -1,4 +1,4 @@
-from fastmcp import tool
+from fastmcp.tools import tool
 @tool()
 def analyze_workload_indexes() -> str:
     """
