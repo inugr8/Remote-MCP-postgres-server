@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-
+import os
 from tools.list_schemas import list_schemas
 from tools.list_objects import list_objects
 from tools.get_object_details import get_object_details
@@ -28,4 +28,6 @@ app = FastMCP(
 )
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.getenv("PORT", "8000"))
+    # Important: bind to 0.0.0.0 so Render can see it
+    app.run(host="0.0.0.0", port=port)
