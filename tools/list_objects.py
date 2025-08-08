@@ -1,7 +1,4 @@
-from fastmcp.tools import tool
 from db import get_connection
-
-@tool()
 def list_objects(schema: str = "public") -> dict:
     """
     Lists tables, views, and sequences in the given schema.
