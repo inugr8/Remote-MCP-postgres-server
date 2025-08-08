@@ -1,7 +1,5 @@
-from fastmcp.tools import tool
 from db import get_connection
 
-@tool()
 def analyze_query_indexes(sql: str) -> list[str]:
     """
     Runs EXPLAIN on query to see which indexes are used.
