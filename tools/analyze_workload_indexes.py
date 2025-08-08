@@ -1,5 +1,3 @@
-from fastmcp.tools import tool
-@tool()
 def analyze_workload_indexes() -> str:
     """
     Placeholder that recommends index strategy for workload.
