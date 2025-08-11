@@ -1,9 +1,9 @@
 from db import get_connection
 from mcp_app import mcp
+
+@mcp.tool
 def get_top_queries(limit: int = 5) -> list[dict]:
-    """
-    Gets top slow queries from pg_stat_statements (if enabled).
-    """
+    """Top queries by total_time from pg_stat_statements (if enabled)."""
     conn = get_connection()
     cur = conn.cursor()
     try:
@@ -13,9 +13,10 @@ def get_top_queries(limit: int = 5) -> list[dict]:
             ORDER BY total_time DESC
             LIMIT %s
         """, (limit,))
-        results = cur.fetchall()
+        rows = cur.fetchall()
     except Exception as e:
-        results = [{"error": str(e)}]
-    cur.close()
-    conn.close()
-    return results
+        rows = [{"error": str(e)}]
+    finally:
+        cur.close()
+        conn.close()
+    return rows
