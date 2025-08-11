@@ -1,4 +1,5 @@
 from db import get_connection
+from mcp_app import mcp
 def execute_sql(sql: str) -> list[dict]:
     """
     Safely executes SELECT queries only.
