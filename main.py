@@ -23,14 +23,11 @@ TOOLS = [
     execute_sql,
 ]
 
-# Create the server in a way that works across FastMCP versions
+# build the server and register tools (works across versions)
 try:
-    # Newer style (constructor may accept tools list)
-    app = FastMCP(TOOLS)  # if this fails, we fall back below
+    app = FastMCP(TOOLS)
 except TypeError:
-    # Older style: construct empty and add tools
     app = FastMCP()
-    # some versions have add_tool, others have add_tools — try both
     add_many = getattr(app, "add_tools", None)
     add_one = getattr(app, "add_tool", None)
     if callable(add_many):
@@ -39,9 +36,14 @@ except TypeError:
         for t in TOOLS:
             add_one(t)
     else:
-        # last resort: FastMCP may accept a .tools attribute
         setattr(app, "tools", TOOLS)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
-    app.run(host="0.0.0.0", port=port)
+    # IMPORTANT: run over HTTP transport so host/port are valid
+    app.run(
+        transport="http",         # or "streamable-http"
+        host="0.0.0.0",
+        port=port,
+        # optional: path="/mcp/", log_level="info"
+    )
