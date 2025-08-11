@@ -1,4 +1,5 @@
 from db import get_connection
+from mcp_app import mcp
 def get_top_queries(limit: int = 5) -> list[dict]:
     """
     Gets top slow queries from pg_stat_statements (if enabled).
