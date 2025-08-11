@@ -1,4 +1,4 @@
 from fastmcp import FastMCP
 
-# Give the server a string name (used in Rich banner & metadata)
+# Create one shared server instance; tools will register via @mcp.tool
 mcp = FastMCP(name="PostgreSQL Deep Inspection Tools")
