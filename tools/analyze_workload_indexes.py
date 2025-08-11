@@ -1,3 +1,4 @@
+from mcp_app import mcp
 def analyze_workload_indexes() -> str:
     """
     Placeholder that recommends index strategy for workload.
