@@ -1,5 +1,5 @@
 from db import get_connection
-
+from mcp_app import mcp
 def list_schemas() -> list[str]:
     """
     Lists all available schemas in the PostgreSQL database.
