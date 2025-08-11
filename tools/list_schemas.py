@@ -1,13 +1,13 @@
 from db import get_connection
 from mcp_app import mcp
+
+@mcp.tool
 def list_schemas() -> list[str]:
-    """
-    Lists all available schemas in the PostgreSQL database.
-    """
+    """List all schemas in the PostgreSQL database."""
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("SELECT schema_name FROM information_schema.schemata")
-    schemas = [row["schema_name"] for row in cur.fetchall()]
+    cur.execute("SELECT schema_name FROM information_schema.schemata ORDER BY schema_name")
+    rows = cur.fetchall()
     cur.close()
     conn.close()
-    return schemas
+    return [r["schema_name"] for r in rows]
