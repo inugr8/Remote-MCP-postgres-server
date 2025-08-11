@@ -1,4 +1,5 @@
 from db import get_connection
+from mcp_app import mcp
 def list_objects(schema: str = "public") -> dict:
     """
     Lists tables, views, and sequences in the given schema.
