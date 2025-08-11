@@ -17,9 +17,9 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
     # Use HTTP transport so host/port are valid on Render
     mcp.run(
-        transport="http",
-        host="0.0.0.0",
-        port=port,
-        path="/",  
-        # log_level="info" # optional
+      transport="http",
+      host="0.0.0.0",
+      port=int(os.environ.get("PORT", "8000")),
+      path="/mcp",  # <— mount here
     )
+    
