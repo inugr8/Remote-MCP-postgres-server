@@ -1,17 +1,17 @@
 from db import get_connection
 from mcp_app import mcp
 
+@mcp.tool
 def analyze_query_indexes(sql: str) -> list[str]:
-    """
-    Runs EXPLAIN on query to see which indexes are used.
-    """
+    """EXPLAIN a query to see index usage."""
     conn = get_connection()
     cur = conn.cursor()
     try:
         cur.execute("EXPLAIN " + sql)
-        result = [row[0] for row in cur.fetchall()]
+        plan = [row[0] for row in cur.fetchall()]
     except Exception as e:
-        result = [str(e)]
-    cur.close()
-    conn.close()
-    return result
+        plan = [str(e)]
+    finally:
+        cur.close()
+        conn.close()
+    return plan
