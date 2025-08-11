@@ -1,4 +1,5 @@
 from db import get_connection
+from mcp_app import mcp
 
 def explain_query(sql: str) -> list[str]:
     """
