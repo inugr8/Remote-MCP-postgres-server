@@ -1,4 +1,5 @@
 from db import get_connection
+from mcp_app import mcp
 
 def get_object_details(table_name: str, schema: str = "public") -> dict:
     """
