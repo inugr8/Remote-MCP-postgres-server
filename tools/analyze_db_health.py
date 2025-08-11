@@ -1,4 +1,5 @@
 from db import get_connection
+from mcp_app import mcp
 def analyze_db_health() -> dict:
     """
     Returns size of each table in the public schema.
