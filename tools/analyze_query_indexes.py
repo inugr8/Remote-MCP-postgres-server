@@ -1,4 +1,5 @@
 from db import get_connection
+from mcp_app import mcp
 
 def analyze_query_indexes(sql: str) -> list[str]:
     """
