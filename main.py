@@ -23,27 +23,26 @@ TOOLS = [
     execute_sql,
 ]
 
-# build the server and register tools (works across versions)
-try:
-    app = FastMCP(TOOLS)
-except TypeError:
-    app = FastMCP()
-    add_many = getattr(app, "add_tools", None)
-    add_one = getattr(app, "add_tool", None)
-    if callable(add_many):
-        add_many(TOOLS)
-    elif callable(add_one):
-        for t in TOOLS:
-            add_one(t)
-    else:
-        setattr(app, "tools", TOOLS)
+# 1) Construct the server with NO positional args
+app = FastMCP()
+
+# 2) Register tools (support both API shapes)
+if hasattr(app, "add_tools") and callable(app.add_tools):
+    app.add_tools(TOOLS)
+elif hasattr(app, "add_tool") and callable(app.add_tool):
+    for t in TOOLS:
+        app.add_tool(t)
+else:
+    # Fallback for very old versions
+    app.tools = TOOLS
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
-    # IMPORTANT: run over HTTP transport so host/port are valid
+    # Run over HTTP so host/port are valid on Render
     app.run(
-        transport="http",         # or "streamable-http"
+        transport="http",
         host="0.0.0.0",
         port=port,
-        # optional: path="/mcp/", log_level="info"
+        # path="/",           # optional
+        # log_level="info",   # optional
     )
